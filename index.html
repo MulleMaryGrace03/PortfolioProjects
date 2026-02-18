@@ -3,26 +3,177 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mary Grace Despi Mulle | Portfolio</title>
+<title>Mary Grace Despi Mulle | Professional Portfolio</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* RESET */
+/* RESET & GLOBAL */
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+    font-family:'Poppins', sans-serif;
     scroll-behavior:smooth;
 }
 
 body{
-    background:linear-gradient(135deg,#E3F2FD,#BBDEFB,#90CAF9);
+    background:linear-gradient(135deg, #E3F2FD, #BBDEFB, #90CAF9);
     color:#0D47A1;
+    transition: background 0.3s;
 }
 
-/* NAVBAR */
+/* ===== PROFESSIONAL SIDEBAR ===== */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -320px;               /* hidden by default, wider for elegance */
+    width: 300px;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 10px 0 40px rgba(13, 71, 161, 0.2);
+    padding: 40px 25px 30px;
+    transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 2000;
+    border-radius: 0 40px 40px 0;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(30, 136, 229, 0.2);
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+/* close button refined */
+.close-btn {
+    background: rgba(30, 136, 229, 0.1);
+    border: none;
+    font-size: 32px;
+    font-weight: 300;
+    color: #0D47A1;
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+    text-align: center;
+    border-radius: 50%;
+    margin-bottom: 30px;
+    cursor: pointer;
+    transition: 0.2s;
+    align-self: flex-end;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.6);
+}
+
+.close-btn:hover {
+    background: #1E88E5;
+    color: white;
+    transform: rotate(90deg);
+    border-color: #1E88E5;
+}
+
+/* profile preview inside sidebar */
+.sidebar-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 35px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid rgba(30, 136, 229, 0.2);
+}
+
+.sidebar-profile-img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 10px 20px rgba(13,71,161,0.2);
+    margin-bottom: 15px;
+}
+
+.sidebar-profile h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #0D47A1;
+    margin-bottom: 5px;
+}
+
+.sidebar-profile p {
+    font-size: 0.9rem;
+    color: #1565C0;
+    font-weight: 400;
+}
+
+/* sidebar navigation menu */
+.sidebar-nav {
+    list-style: none;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebar-nav li {
+    width: 100%;
+}
+
+.sidebar-nav li a {
+    text-decoration: none;
+    color: #0D47A1;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 14px 20px;
+    border-radius: 60px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+    background: rgba(255,255,255,0.3);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.5);
+}
+
+.sidebar-nav li a i { 
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.3rem;
+    min-width: 30px;
+    text-align: center;
+}
+
+.sidebar-nav li a:hover {
+    background: #1E88E5;
+    color: white;
+    transform: translateX(8px);
+    border-color: #1E88E5;
+    box-shadow: 0 8px 20px rgba(30, 136, 229, 0.3);
+}
+
+/* overlay more subtle */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 71, 161, 0.15);
+    backdrop-filter: blur(3px);
+    z-index: 1500;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ===== NAVBAR (refined) ===== */
 nav{
     position:fixed;
     width:100%;
@@ -32,184 +183,244 @@ nav{
     justify-content:space-between;
     align-items:center;
     padding:15px 8%;
-    background:rgba(255,255,255,0.25);
-    backdrop-filter:blur(10px);
+    background:rgba(255,255,255,0.35);
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
     z-index:1000;
+    box-shadow: 0 4px 20px rgba(13,71,161,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 nav h2{
-    font-weight:700;
-    font-size:24px;
+    font-weight:600;
+    font-size:1.5rem;
+    background: linear-gradient(135deg, #0D47A1, #1565C0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
 }
 
-nav ul{
-    list-style:none;
-    display:flex;
-    gap:20px;
+/* desktop inline menu */
+#nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 30px;
 }
 
-nav ul li a{
+#nav-menu li a {
     text-decoration:none;
     color:#0D47A1;
     font-weight:500;
+    font-size:1rem;
+    padding:8px 0;
+    transition:0.3s;
     position:relative;
-    padding:5px;
-    transition:0.3s all ease;
 }
 
-nav ul li a::after{
+#nav-menu li a::after{
     content:"";
     position:absolute;
     width:0%;
-    height:2px;
+    height:2.5px;
     background:#1E88E5;
     left:0;
-    bottom:0;
+    bottom:-2px;
     transition:0.4s;
+    border-radius: 2px;
 }
 
-nav ul li a:hover::after{
+#nav-menu li a:hover::after{
     width:100%;
 }
 
-/* MOBILE NAVBAR TOGGLE */
+#nav-menu li a:hover {
+    color: #0D47A1;
+}
+
+/* elegant toggle buttons */
 .nav-toggle{
     display:none;
     flex-direction:column;
     cursor:pointer;
-    gap:5px;
-    order:2; /* keeps it on the right */
-    z-index:1001; /* higher than nav ul so it's always clickable */
+    gap:6px;
+    background: rgba(255,255,255,0.4);
+    padding: 10px 12px;
+    border-radius: 30px;
+    backdrop-filter: blur(5px);
 }
 
 .nav-toggle span{
-    width:25px;
-    height:3px;
+    width:26px;
+    height:2.5px;
     background:#0D47A1;
-    border-radius:2px;
+    border-radius:4px;
+    transition: 0.2s;
 }
 
-/* HERO */
+.sidebar-toggle-desktop {
+    background: rgba(255,255,255,0.5);
+    border: none;
+    font-size: 28px;
+    width: 48px;
+    height: 48px;
+    border-radius: 30px;
+    color: #0D47A1;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    transition: 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,0.7);
+    box-shadow: 0 4px 10px rgba(13,71,161,0.1);
+}
+
+.sidebar-toggle-desktop:hover {
+    background: #1E88E5;
+    color: white;
+    transform: scale(1.05);
+    border-color: #1E88E5;
+}
+
+/* ===== HERO & SECTIONS (maintain design) ===== */
 .hero{
     min-height:85vh;
     display:flex;
     justify-content:center;
     align-items:center;
     padding:0 8%;
-    gap:40px;
+    gap:50px;
     flex-wrap:wrap;
     animation:fadeIn 1.5s ease-in-out;
+    margin-top: 30px; 
 }
 
 .hero-text{
-    max-width:450px;
+    max-width:500px;
     animation:slideInLeft 1s ease-out;
 }
 
 .hero h1{
-    font-size:46px;
+    font-size:48px;
     font-weight:700;
+    line-height: 1.2;
 }
 
 .hero h1 span{
     color:#1565C0;
     transition:0.3s;
+    position: relative;
+    display: inline-block;
 }
 
-.hero h1 span:hover{
-    color:#0D47A1;
+.hero h1 span::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: rgba(30, 136, 229, 0.2);
+    border-radius: 4px;
+    z-index: -1;
 }
 
 .hero p{
-    margin:15px 0;
+    margin:20px 0 25px;
     font-size:17px;
-    line-height:1.5;
+    line-height:1.6;
+    color: #0D47A1;
 }
 
 .profile-img{
-    width:250px;
-    height:250px;
+    width:280px;
+    height:280px;
     border-radius:50%;
     object-fit:cover;
-    border:6px solid white;
-    box-shadow:0 15px 30px rgba(0,0,0,0.2);
-    transition:0.4s;
+    border:8px solid white;
+    box-shadow:0 20px 40px rgba(13,71,161,0.25);
+    transition:0.5s;
     animation:slideInRight 1s ease-out;
 }
 
 .profile-img:hover{
-    transform:scale(1.05);
+    transform:scale(1.02) rotate(2deg);
 }
 
-/* BUTTON */
 .btn{
-    padding:10px 25px;
+    padding:12px 32px;
     background:#1E88E5;
     color:white;
     border:none;
-    border-radius:30px;
+    border-radius:50px;
     cursor:pointer;
     transition:0.4s all ease;
     text-decoration:none;
     display:inline-block;
+    font-weight:500;
+    box-shadow:0 8px 18px rgba(30,136,229,0.3);
 }
 
 .btn:hover{
-    transform:scale(1.1);
+    transform:translateY(-3px);
     background:#1565C0;
-    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+    box-shadow:0 15px 25px rgba(13,71,161,0.3);
 }
 
-.btn:active{
-    background:#0D47A1;
-    transform:scale(0.95);
-}
-
-/* SECTIONS */
 section{
     padding:80px 8%;
 }
 
 .section-title{
     text-align:center;
-    font-size:30px;
-    margin-bottom:40px;
-    position:relative;
+    font-size:32px;
+    margin-bottom:50px;
+    font-weight:600;
+    color: #0D47A1;
 }
 
 .section-title::after{
     content:"";
-    width:60px;
-    height:3px;
-    background:#1E88E5;
+    width:80px;
+    height:4px;
+    background:linear-gradient(90deg, #1E88E5, #90CAF9);
     display:block;
-    margin:10px auto 0 auto;
-    border-radius:2px;
+    margin:12px auto 0 auto;
+    border-radius:4px;
 }
 
-/* CARDS */
 .cards{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:25px;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
 }
 
 .card{
-    background:rgba(255,255,255,0.25);
-    backdrop-filter:blur(12px);
-    padding:25px;
-    border-radius:20px;
+    background:rgba(255,255,255,0.35);
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
+    padding:30px 25px;
+    border-radius:28px;
     text-align:center;
     transition:0.5s all ease;
-    box-shadow:0 8px 18px rgba(0,0,0,0.1);
+    box-shadow:0 15px 30px rgba(13,71,161,0.1);
     opacity:0;
     transform:translateY(30px);
+    border:1px solid rgba(255,255,255,0.6);
 }
 
 .card:hover{
-    transform:translateY(-10px) scale(1.03);
-    box-shadow:0 15px 30px rgba(0,0,0,0.2);
-    background:rgba(255,255,255,0.35);
+    transform:translateY(-12px) scale(1.02);
+    box-shadow:0 25px 40px rgba(13,71,161,0.2);
+    background:rgba(255,255,255,0.45);
+    border-color: #1E88E5;
 }
 
 .card.show{
@@ -217,188 +428,147 @@ section{
     transform:translateY(0);
 }
 
-/* SOCIAL MEDIA LINKS */
 .social{
     display:flex;
     justify-content:center;
-    gap:15px;
-    margin-top:15px;
+    gap:18px;
+    margin-top:20px;
 }
 
 .social a{
     display:inline-block;
-    width:45px;
-    height:45px;
+    width:48px;
+    height:48px;
     background:#1E88E5;
     color:white;
     text-align:center;
-    line-height:45px;
+    line-height:48px;
     border-radius:50%;
     transition:0.4s all ease;
-    font-size:20px;
+    font-size:18px;
     text-decoration:none;
+    font-weight:600;
+    box-shadow:0 5px 12px rgba(0,0,0,0.1);
+    border:2px solid transparent;
 }
 
 .social a:hover{
-    transform:scale(1.2);
+    transform:scale(1.15) translateY(-3px);
     background:#1565C0;
-    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+    border-color: white;
 }
 
-/* FOOTER */
 footer{
     text-align:center;
-    padding:25px;
-    background:rgba(255,255,255,0.25);
+    padding:30px;
+    background:rgba(255,255,255,0.3);
+    backdrop-filter:blur(8px);
     margin-top:40px;
+    font-weight:400;
+    border-top: 1px solid rgba(255,255,255,0.6);
 }
 
-/* ANIMATIONS */
-@keyframes fadeIn{
-    from{opacity:0;}
-    to{opacity:1;}
-}
-@keyframes slideInLeft{
-    from{opacity:0; transform:translateX(-50px);}
-    to{opacity:1; transform:translateX(0);}
-}
-@keyframes slideInRight{
-    from{opacity:0; transform:translateX(50px);}
-    to{opacity:1; transform:translateX(0);}
-}
+@keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
+@keyframes slideInLeft{ from{opacity:0; transform:translateX(-50px);} to{opacity:1; transform:translateX(0);} }
+@keyframes slideInRight{ from{opacity:0; transform:translateX(50px);} to{opacity:1; transform:translateX(0);} }
 
-/* RESPONSIVE STYLES */
+/* ===== RESPONSIVE ===== */
 @media(max-width:1024px){
-    nav{
-        padding:15px 5%;
-    }
-
-    nav ul li{
-        margin-left:15px;
-    }
-
-    .hero h1{
-        font-size:38px;
-    }
-
-    .hero-text p{
-        font-size:16px;
-    }
-
-    .profile-img{
-        width:220px;
-        height:220px;
-    }
-
-    section{
-        padding:60px 5%;
-    }
-
-    .cards{
-        gap:20px;
-    }
+    nav{ padding:15px 5%; }
+    .hero h1{ font-size:42px; }
+    .profile-img{ width:240px; height:240px; }
+    section{ padding:60px 5%; }
 }
 
 @media(max-width:768px){
-    nav{
-        flex-direction:column;
-        align-items:flex-start;
+    #nav-menu {
+        display: none;
     }
-
-    .nav-toggle{
-        display:flex;
+    .nav-toggle {
+        display: flex;
     }
-
-    nav ul{
-        flex-direction:column;
-        width:100%;
-        margin-top:10px;
-        display:none;
+    .sidebar-toggle-desktop {
+        display: none;
     }
-
-    nav ul.active{
-        display:flex;
+    nav {
+        padding: 12px 5%;
     }
-
-    .hero{
-        flex-direction:column;
-        text-align:center;
-        padding-top:120px;
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 100px;
+        gap:20px;
     }
-
-    .hero h1{
-        font-size:32px;
-    }
-
-    .hero-text{
-        max-width:100%;
-    }
-
-    .profile-img{
-        width:180px;
-        height:180px;
-        margin-top:20px;
-    }
-
-    .cards{
-        grid-template-columns:1fr;
-    }
-
-    .section-title{
-        font-size:26px;
+    .hero h1{ font-size:36px; }
+    .profile-img{ width:200px; height:200px; }
+    .cards{ grid-template-columns:1fr; }
+    .section-title{ font-size:28px; }
+    .sidebar {
+        width: 280px;
+        left: -300px;
     }
 }
 
 @media(max-width:480px){
-    body{
-        font-size:14px;
-    }
+    body{ font-size:14px; }
+    nav h2{ font-size:1.2rem; }
+    .hero h1{ font-size:30px; }
+    .btn{ padding:10px 24px; }
+    .social a{ width:42px; height:42px; line-height:42px; font-size:16px; }
+    .section-title{ font-size:24px; }
+    .sidebar{ width: 260px; }
+}
 
-    nav h2{
-        font-size:18px;
-    }
-
-    .hero h1{
-        font-size:28px;
-    }
-
-    .btn{
-        padding:8px 20px;
-        font-size:14px;
-    }
-
-    .social a{
-        width:40px;
-        height:40px;
-        line-height:40px;
-        font-size:18px;
-    }
-
-    .section-title{
-        font-size:22px;
-    }
-
-    .cards{
-        gap:15px;
-    }
-
-    .card{
-        padding:20px;
-    }
+/* small addition for profile in sidebar (using existing profile img) */
+.sidebar-profile-img {
+    background: #e3f2fd;
 }
 </style>
 </head>
-
 <body>
 
-<!-- NAVBAR -->
+<!-- OVERLAY (click to close) -->
+<div class="overlay" id="overlay"></div>
+
+<!-- PROFESSIONAL SIDEBAR -->
+<div class="sidebar" id="sidebar">
+    <button class="close-btn" id="closeSidebar">×</button>
+    
+    <!-- Profile preview inside sidebar -->
+    <div class="sidebar-profile">
+        <img src="profile.jpg" alt="Mary Grace" class="sidebar-profile-img" onerror="this.src='https://via.placeholder.com/90/1E88E5/white?text=MG'">
+        <h3>Mary Grace D. Mulle</h3>
+        <p>IT Student · 3rd Year</p>
+    </div>
+
+    <ul class="sidebar-nav">
+        <li><a href="#about"><i>👤</i> About</a></li>
+        <li><a href="#education"><i>🎓</i> Education</a></li>
+        <li><a href="#skills"><i>⚙️</i> Skills</a></li>
+        <li><a href="#projects"><i>💻</i> Projects</a></li>
+        <li><a href="#contact"><i>📬</i> Contact</a></li>
+    </ul>
+    
+    <!-- subtle footer note -->
+    <div style="text-align:center; font-size:0.8rem; color:#1565C0; margin-top:20px; opacity:0.7;">
+     @ MGDM| Portfolio
+    </div>
+</div>
+
+<!-- NAVBAR (aligned with new design) -->
 <nav>
-    <h2>Mary Grace Despi Mulle</h2>
+    <div class="logo-area">
+        <!-- desktop sidebar toggle (elegant) -->
+        <button class="sidebar-toggle-desktop" id="desktopToggle">☰</button>
+        <h2>Mary Grace Despi Mulle</h2>
+    </div>
+    <!-- mobile hamburger -->
     <div class="nav-toggle" id="nav-toggle">
         <span></span>
         <span></span>
         <span></span>
     </div>
+    <!-- inline desktop menu -->
     <ul id="nav-menu">
         <li><a href="#about">About</a></li>
         <li><a href="#education">Education</a></li>
@@ -415,7 +585,7 @@ footer{
        <p>A 3rd Year Bachelor of Science in Information Technology student at Madridejos Community College, passionate about building modern, responsive, and user-friendly web applications.</p>
        
     </div>
-    <img src="profile.jpg" alt="Mary Grace" class="profile-img">
+    <img src="profile.jpg" alt="Mary Grace" class="profile-img" onerror="this.src='https://via.placeholder.com/280/1E88E5/white?text=MG'">
 </div>
 
 <!-- ABOUT -->
@@ -465,8 +635,8 @@ footer{
     <h2 class="section-title">Contact Me</h2>
     <div class="cards">
         <div class="card">
-            <p>Email: mullemarygrace448@email.com</p>
-            <p>Location: Philippines</p>
+            <p style="margin-bottom:8px;">📧 mullemarygrace448@email.com</p>
+            <p>📍 Philippines</p>
             <div class="social">
                 <a href="https://github.com/Mullemarygrace03" target="_blank">GH</a>
                 <a href="https://www.facebook.com/mary.grace.despi.mulle" target="_blank">FB</a>
@@ -482,23 +652,67 @@ footer{
 </footer>
 
 <script>
-// Scroll reveal animation
+// Scroll reveal (cards)
 const cards = document.querySelectorAll(".card");
-const observer = new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-        if(entry.isIntersecting){
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if(entry.isIntersecting) {
             entry.target.classList.add("show");
         }
     });
-},{threshold:0.2});
+}, {threshold:0.2});
 cards.forEach(card => observer.observe(card));
 
-// Navbar toggle for mobile
-const navToggle = document.getElementById('nav-toggle');
-const navMenu = document.getElementById('nav-menu');
+// SIDEBAR PROFESSIONAL CONTROLS
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+const closeBtn = document.getElementById('closeSidebar');
+const mobileToggle = document.getElementById('nav-toggle');
+const desktopToggle = document.getElementById('desktopToggle');
 
-navToggle.addEventListener('click', ()=>{
-    navMenu.classList.toggle('active');
+function openSidebar() {
+    sidebar.classList.add('active');
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeSidebar() {
+    sidebar.classList.remove('active');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// open events
+if (mobileToggle) mobileToggle.addEventListener('click', (e) => { e.stopPropagation(); openSidebar(); });
+if (desktopToggle) desktopToggle.addEventListener('click', (e) => { e.stopPropagation(); openSidebar(); });
+
+// close events
+if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+overlay.addEventListener('click', closeSidebar);
+
+// close on link click (smooth + close)
+document.querySelectorAll('.sidebar-nav li a').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href');
+        if (targetId && targetId !== '#') {
+            const targetEl = document.querySelector(targetId);
+            if (targetEl) targetEl.scrollIntoView({ behavior: 'smooth' });
+        }
+        closeSidebar();
+    });
+});
+
+// escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && sidebar.classList.contains('active')) closeSidebar();
+});
+
+// optional: resize handler to close sidebar on large screen if open? we keep
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 992 && sidebar.classList.contains('active')) {
+        // optional: closeSidebar(); // decide if you want auto-close on desktop
+    }
 });
 </script>
 
