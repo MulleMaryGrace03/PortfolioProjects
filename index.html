@@ -78,6 +78,8 @@ nav ul li a:hover::after{
     flex-direction:column;
     cursor:pointer;
     gap:5px;
+    order:2; /* keeps it on the right */
+    z-index:1001; /* higher than nav ul so it's always clickable */
 }
 
 .nav-toggle span{
