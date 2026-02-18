@@ -34,10 +34,12 @@ nav{
     background:rgba(255,255,255,0.25);
     backdrop-filter:blur(10px);
     z-index:1000;
+    transition:0.4s;
 }
 
 nav h2{
     font-weight:700;
+    font-size:24px;
 }
 
 nav ul{
@@ -232,21 +234,118 @@ footer{
     to{opacity:1; transform:translateX(0);}
 }
 
-/* RESPONSIVE */
-@media(max-width:768px){
-    .hero{
-        flex-direction:column;
-        text-align:center;
-        padding-top:100px;
+/* RESPONSIVE ENHANCEMENTS */
+@media (max-width:1024px){
+    nav{
+        padding:15px 5%;
+    }
+
+    nav ul li{
+        margin-left:15px;
     }
 
     .hero h1{
-        font-size:34px;
+        font-size:38px;
+    }
+
+    .hero-text p{
+        font-size:16px;
     }
 
     .profile-img{
-        width:200px;
-        height:200px;
+        width:220px;
+        height:220px;
+    }
+
+    section{
+        padding:60px 5%;
+    }
+
+    .cards{
+        gap:20px;
+    }
+}
+
+@media(max-width:768px){
+    nav{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    nav ul{
+        flex-direction:column;
+        width:100%;
+        margin-top:10px;
+    }
+
+    nav ul li{
+        margin:10px 0;
+    }
+
+    .hero{
+        flex-direction:column;
+        text-align:center;
+        padding-top:120px;
+    }
+
+    .hero h1{
+        font-size:32px;
+    }
+
+    .hero-text{
+        max-width:100%;
+    }
+
+    .profile-img{
+        width:180px;
+        height:180px;
+        margin-top:20px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .section-title{
+        font-size:26px;
+    }
+}
+
+@media(max-width:480px){
+    body{
+        font-size:14px;
+    }
+
+    nav h2{
+        font-size:18px;
+    }
+
+    .hero h1{
+        font-size:28px;
+    }
+
+    .btn{
+        padding:8px 20px;
+        font-size:14px;
+    }
+
+    .social a{
+        width:40px;
+        height:40px;
+        line-height:40px;
+        font-size:18px;
+    }
+
+    .section-title{
+        font-size:22px;
+    }
+
+    .cards{
+        gap:15px;
+    }
+
+    .card{
+        padding:20px;
     }
 }
 </style>
@@ -270,8 +369,7 @@ footer{
 <div class="hero">
     <div class="hero-text">
        <h1>Hello, I'm <span>Mary Grace Despi Mulle</span></h1>
-<p>A 3rd Year Bachelor of Science in Information Technology student at Madridejos Community College, passionate about building modern, responsive, and user-friendly web applications.</p>
-
+       <p>A 3rd Year Bachelor of Science in Information Technology student at Madridejos Community College, passionate about building modern, responsive, and user-friendly web applications.</p>
     </div>
     <img src="profile.jpg" alt="Mary Grace" class="profile-img">
 </div>
@@ -298,7 +396,6 @@ footer{
         </div>
     </div>
 </section>
-
 
 <!-- SKILLS -->
 <section id="skills">
@@ -353,5 +450,5 @@ const observer = new IntersectionObserver(entries=>{
 cards.forEach(card => observer.observe(card));
 </script>
 
-</body>
+</body>   
 </html>
